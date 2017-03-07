@@ -12,9 +12,7 @@ import (
 const API_URI string = "https://api.gifs.com/media/upload"
 const API_KEY string = "API_KEY"
 
-func setApiKey() {
-	var key string
-
+func setConfig() {
 	for {
 		fmt.Print("\nEnter your gifs.com API key (ie. gifs58xxce10ad223): ")
 		fmt.Scanf("%s\n", &key)
