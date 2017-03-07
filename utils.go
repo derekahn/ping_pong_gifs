@@ -26,8 +26,16 @@ func setConfig() {
 	}
 	os.Setenv(USER_GIFS_DIR, userDir)
 
-	os.Setenv(API_KEY, key)
-	fmt.Printf("Key set to: %s \n", key)
+	var key string
+	fmt.Print("\nEnter your gifs.com API key (ie. gifs58xxce10ad223): ")
+	fmt.Scanf("%s\n", &key)
+
+	if strings.Contains(key, "gifs") {
+		os.Setenv(API_KEY, key)
+		fmt.Printf("Key set to: %s \n", key)
+	} else {
+		fmt.Print("No key set! Won't be uploading to your dasahboard. \n")
+	}
 }
 
 func getGifFiles(path string) ([]string, error) {
