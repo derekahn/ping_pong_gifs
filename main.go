@@ -16,7 +16,15 @@ func main() {
 		log.Printf("\033[31m[ERROR]\033[0m %s\n", err.Error())
 	}
 
-	log.Print("files", files)
+	half := len(files) / 2
+	firstHalf := files[:half]
+	otherHalf := files[half:]
+
+	go uploadPingPongs(firstHalf)
+	go uploadPingPongs(otherHalf)
 
 	http.ListenAndServe(":8080", http.FileServer(http.Dir(dir)))
+}
+
+func uploadPingPongs(files []string) {
 }
