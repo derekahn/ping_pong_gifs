@@ -88,16 +88,20 @@ func encodePingPong(g *gif.GIF) *gif.GIF {
 	return g
 }
 
-func saveGif(name string, g *gif.GIF) error {
-	fileName := dir + rmPathToUserGifs(name)
+func saveGif(name string, g *gif.GIF) (fileName string, err error) {
+	fileName = GIFS_DIR + rmPathToUserGifs(name)
 	file, err := os.Create(fileName)
 	if err != nil {
-		return err
+		return
 	}
 	defer file.Close()
 
-	if err := gif.EncodeAll(file, g); err != nil {
-		return err
+	if err = gif.EncodeAll(file, g); err != nil {
+		return
+	}
+
+	return
+}
 	}
 
 	return nil
