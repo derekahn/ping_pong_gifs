@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 	"sync"
 )
 
@@ -13,7 +12,7 @@ func main() {
 
 	setConfig()
 
-	files, err := getGifFiles(os.Getenv(USER_GIFS_DIR))
+	files, err := getGifFiles(pathToUserGifs())
 	if err != nil {
 		log.Printf("\033[31m[ERROR]\033[0m %s\n", err.Error())
 	}
@@ -44,6 +43,7 @@ func uploadPingPongs(files []string) {
 			if err := saveGif(file, newGif); err != nil {
 				log.Printf("\033[31m[ERROR]\033[0m %s\n", err.Error())
 			}
+
 		}(file)
 
 	}
