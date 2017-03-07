@@ -1,8 +1,11 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
 const API_URI string = "https://api.gifs.com/media/upload"
@@ -22,4 +25,29 @@ func setApiKey() {
 
 	os.Setenv(API_KEY, key)
 	fmt.Printf("Key set to: %s \n", key)
+}
+
+func getGifFiles(path string) ([]string, error) {
+	files, err := ioutil.ReadDir(path)
+	if err != nil {
+		return nil, err
+	}
+
+	gifs := []string{}
+
+	for _, file := range files {
+
+		fileName := file.Name()
+		ext := filepath.Ext(fileName)
+
+		if ext == ".gif" {
+			gifs = append(gifs, dir+fileName)
+		}
+	}
+
+	if len(gifs) < 1 {
+		return nil, errors.New("No .gifs available in dir")
+	}
+
+	return gifs, nil
 }
