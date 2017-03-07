@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"image/gif"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -50,4 +51,19 @@ func getGifFiles(path string) ([]string, error) {
 	}
 
 	return gifs, nil
+}
+
+func decodeGif(path string) (g *gif.GIF, err error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return
+	}
+	defer file.Close()
+
+	g, err = gif.DecodeAll(file)
+	if err != nil {
+		return
+	}
+
+	return
 }
