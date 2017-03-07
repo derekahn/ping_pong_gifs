@@ -9,7 +9,6 @@ import (
 const GIFS_DIR string = "gifs/"
 
 func main() {
-
 	setConfig()
 
 	files, err := getGifFiles(pathToUserGifs())
