@@ -3,7 +3,7 @@
 A simple program that can take a specified directory full of `.gifs` and encode it with a `pingpong style` concurrently; all the while saving to the output directory `gifs/` and uploading to [gifs.com](https://gifs.com/).
 
 ## Usage
-With my provided test_gifs full of awesomeness 🐶 🐕 🐩:
+With my provided `test_gifs` full of awesomeness 🐶 🐕 🐩:
 ```bash
 # Linux peoples
 $ 7z x -so test_gifs.tar.7z | tar xf - -C test_gifs/
@@ -28,8 +28,8 @@ $ go run *.go
 # while you wait for the uploads! 🍻
 ```
 ### Resources
-[P7zip](http://brewformulas.org/P7zip)
-[gifs API](http://docs.gifs.com/v1.0/docs#)
+- [P7zip](http://brewformulas.org/P7zip)
+- [gifs API](http://docs.gifs.com/v1.0/docs#)
 
 ### Terms
-`pingpong style` = It plays both forward and then backward in a loop.
+- `pingpong style` = It plays both forward and then backward in a loop.
