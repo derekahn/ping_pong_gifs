@@ -1,41 +1,14 @@
 package main
 
 import (
-	"errors"
-	"fmt"
-	"image/gif"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
-const API_URI string = "https://api.gifs.com/media/upload"
-const API_KEY string = "API_KEY"
-const USER_GIFS_DIR string = "USER_GIFS_DIR"
-
-func setConfig() {
-	var userDir string
-	for {
-		fmt.Print("\nEnter ./path/to/gifs/directory: ")
-		fmt.Scanf("%s\n", &userDir)
-
-		if len(userDir) > 3 {
-			break
-		}
-	}
-	os.Setenv(USER_GIFS_DIR, userDir)
-
-	var key string
-	fmt.Print("\nEnter your gifs.com API key (ie. gifs58xxce10ad223): ")
-	fmt.Scanf("%s\n", &key)
-
-	if strings.Contains(key, "gifs") {
-		os.Setenv(API_KEY, key)
-		fmt.Printf("Key set to: %s \n", key)
-	} else {
-		fmt.Print("No key set! Won't be uploading to your dasahboard. \n")
-	}
+func rmPathToUserGifs(fileName string) (newName string) {
+	newName = strings.TrimPrefix(fileName, pathToUserGifs())
+	return
 }
 
 func getGifFiles(path string) ([]string, error) {
