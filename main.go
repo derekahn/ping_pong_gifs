@@ -44,6 +44,10 @@ func uploadPingPongs(files []string) {
 			request, err := createFileUploadRequest(savedFile)
 			checkFor(err)
 
+			res, err := upload(request)
+			checkFor(err)
+
+			log.Printf("\033[32m[SUCCESS]\033[0m Uploaded %s Successfully to %s\n", savedFile, res.Success.Page)
 		}(file)
 
 	}

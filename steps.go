@@ -2,9 +2,11 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"image/gif"
+	"io"
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
@@ -12,6 +14,12 @@ import (
 	"path/filepath"
 	"strings"
 )
+
+type gifsResponse struct {
+	Success struct {
+		Page string `json:"page"`
+	} `json:"success"`
+}
 
 const API_URI string = "https://api.gifs.com/media/upload"
 const API_KEY string = "API_KEY"
@@ -137,7 +145,23 @@ func createFileUploadRequest(path string) (*http.Request, error) {
 
 	return req, err
 }
+
+func upload(req *http.Request) (success gifsResponse, err error) {
+	client := &http.Client{}
+	res, err := client.Do(req)
+	if err != nil {
+		return
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return
 	}
 
-	return nil
+	if err = json.Unmarshal(body, &success); err != nil {
+		return
+	}
+
+	return
 }
