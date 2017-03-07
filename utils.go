@@ -20,7 +20,7 @@ func rmPathToUserGifs(fileName string) (newName string) {
 
 // RM dir path to user gifs & file extension
 func trimFileName(fileName string) (newFileName string) {
-	noPrefix := rmPathToUserGifs(fileName)
+	noPrefix := strings.TrimPrefix(fileName, GIFS_DIR)
 	newFileName = strings.TrimSuffix(noPrefix, filepath.Ext(fileName))
 	return
 }
