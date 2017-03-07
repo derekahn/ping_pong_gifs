@@ -67,3 +67,13 @@ func decodeGif(path string) (g *gif.GIF, err error) {
 
 	return
 }
+
+func encodePingPong(g *gif.GIF) *gif.GIF {
+	for i := len(g.Image) - 1; i >= 0; i-- {
+		g.Image = append(g.Image, g.Image[i])
+		g.Delay = append(g.Delay, g.Delay[i])
+		g.Disposal = append(g.Disposal, byte(g.Disposal[i]))
+	}
+
+	return g
+}
