@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"sync"
 )
 
 const dir string = "gifs/"
@@ -27,4 +28,23 @@ func main() {
 }
 
 func uploadPingPongs(files []string) {
+	var wg sync.WaitGroup
+
+	for _, file := range files {
+		wg.Add(1)
+
+		go func(file string) {
+			g, err := decodeGif(file)
+			if err != nil {
+				log.Printf("\033[31m[ERROR]\033[0m %s\n", err.Error())
+			}
+
+			newGif := encodePingPong(g)
+			if err := saveGif(file, newGif); err != nil {
+				log.Printf("\033[31m[ERROR]\033[0m %s\n", err.Error())
+			}
+		}(file)
+
+	}
+	wg.Wait()
 }
