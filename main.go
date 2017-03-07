@@ -38,9 +38,11 @@ func uploadPingPongs(files []string) {
 			}
 
 			newGif := encodePingPong(g)
-			if err := saveGif(file, newGif); err != nil {
-				log.Printf("\033[31m[ERROR]\033[0m %s\n", err.Error())
-			}
+			savedFile, err := saveGif(file, newGif)
+			checkFor(err)
+
+			request, err := createFileUploadRequest(savedFile)
+			checkFor(err)
 
 		}(file)
 
