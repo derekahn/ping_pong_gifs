@@ -7,20 +7,24 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 const API_URI string = "https://api.gifs.com/media/upload"
 const API_KEY string = "API_KEY"
+const USER_GIFS_DIR string = "USER_GIFS_DIR"
 
 func setConfig() {
+	var userDir string
 	for {
-		fmt.Print("\nEnter your gifs.com API key (ie. gifs58xxce10ad223): ")
-		fmt.Scanf("%s\n", &key)
+		fmt.Print("\nEnter ./path/to/gifs/directory: ")
+		fmt.Scanf("%s\n", &userDir)
 
-		if len(key) > 0 {
+		if len(userDir) > 3 {
 			break
 		}
 	}
+	os.Setenv(USER_GIFS_DIR, userDir)
 
 	os.Setenv(API_KEY, key)
 	fmt.Printf("Key set to: %s \n", key)
