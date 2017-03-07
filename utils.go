@@ -78,12 +78,11 @@ func decodeGif(path string) (g *gif.GIF, err error) {
 	return
 }
 
-func encodePingPong(g *gif.GIF) *gif.GIF {
-	for i := len(g.Image) - 1; i >= 0; i-- {
-		g.Image = append(g.Image, g.Image[i])
-		g.Delay = append(g.Delay, g.Delay[i])
-		g.Disposal = append(g.Disposal, byte(g.Disposal[i]))
+// Gets the USER_GIFS_DIR env var and appends a "/" if necessary
+func pathToUserGifs() (path string) {
+	path = os.Getenv(USER_GIFS_DIR)
+	if !strings.HasSuffix(path, "/") {
+		return path + "/"
 	}
-
-	return g
+	return
 }
