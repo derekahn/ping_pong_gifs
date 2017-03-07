@@ -45,7 +45,7 @@ func setConfig() {
 		os.Setenv(API_KEY, key)
 		fmt.Printf("Key set to: %s \n", key)
 	} else {
-		fmt.Print("No key set! Won't be uploading to your dasahboard. \n")
+		fmt.Print("No key set! Won't be uploading to your dashboard. \n")
 	}
 }
 
