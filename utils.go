@@ -11,29 +11,11 @@ func rmPathToUserGifs(fileName string) (newName string) {
 	return
 }
 
-func getGifFiles(path string) ([]string, error) {
-	files, err := ioutil.ReadDir(path)
-	if err != nil {
-		return nil, err
-	}
-
-	gifs := []string{}
-
-	for _, file := range files {
-
-		fileName := file.Name()
-		ext := filepath.Ext(fileName)
-
-		if ext == ".gif" {
-			gifs = append(gifs, dir+fileName)
-		}
-	}
-
-	if len(gifs) < 1 {
-		return nil, errors.New("No .gifs available in dir")
-	}
-
-	return gifs, nil
+// RM dir path to user gifs & file extension
+func trimFileName(fileName string) (newFileName string) {
+	noPrefix := rmPathToUserGifs(fileName)
+	newFileName = strings.TrimSuffix(noPrefix, filepath.Ext(fileName))
+	return
 }
 
 func decodeGif(path string) (g *gif.GIF, err error) {
