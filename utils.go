@@ -18,19 +18,10 @@ func trimFileName(fileName string) (newFileName string) {
 	return
 }
 
-func decodeGif(path string) (g *gif.GIF, err error) {
-	file, err := os.Open(path)
-	if err != nil {
-		return
-	}
-	defer file.Close()
-
-	g, err = gif.DecodeAll(file)
-	if err != nil {
-		return
-	}
-
-	return
+// Formats "/some/path/to/crazy_funny_cool.gif" to "Crazy Funny Cool"
+func createTitle(fileName string) string {
+	name := trimFileName(fileName)
+	return strings.Title(strings.Join(strings.Split(name, "_"), " "))
 }
 
 // Gets the USER_GIFS_DIR env var and appends a "/" if necessary
