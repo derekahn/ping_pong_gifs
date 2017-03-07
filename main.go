@@ -11,7 +11,7 @@ const dir string = "gifs/"
 
 func main() {
 
-	setApiKey()
+	setConfig()
 
 	files, err := getGifFiles(os.Getenv(USER_GIFS_DIR))
 	if err != nil {
