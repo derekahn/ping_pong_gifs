@@ -6,16 +6,14 @@ import (
 	"sync"
 )
 
-const dir string = "gifs/"
+const GIFS_DIR string = "gifs/"
 
 func main() {
 
 	setConfig()
 
 	files, err := getGifFiles(pathToUserGifs())
-	if err != nil {
-		log.Printf("\033[31m[ERROR]\033[0m %s\n", err.Error())
-	}
+	checkFor(err)
 
 	half := len(files) / 2
 	firstHalf := files[:half]
@@ -24,7 +22,7 @@ func main() {
 	go uploadPingPongs(firstHalf)
 	go uploadPingPongs(otherHalf)
 
-	http.ListenAndServe(":8080", http.FileServer(http.Dir(dir)))
+	http.ListenAndServe(":8080", http.FileServer(http.Dir(GIFS_DIR)))
 }
 
 func uploadPingPongs(files []string) {
