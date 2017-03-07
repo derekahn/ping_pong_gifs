@@ -1,10 +1,17 @@
 package main
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
 )
+
+func checkFor(err error) {
+	if err != nil {
+		log.Printf("\033[31m[ERROR]\033[0m %s\n", err.Error())
+	}
+}
 
 func rmPathToUserGifs(fileName string) (newName string) {
 	newName = strings.TrimPrefix(fileName, pathToUserGifs())
