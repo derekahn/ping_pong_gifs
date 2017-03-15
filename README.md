@@ -2,6 +2,9 @@
 
 A simple program that can take a specified directory full of `.gifs` and encode it with a `pingpong style` concurrently; all the while saving to the output directory `gifs/` and uploading to [gifs.com](https://gifs.com/).
 
+![Turns this:](https://gifs.com/gif/Wn01zn)
+![Into this:](http://gifs.com/gif/alice-mathing-bridge-mwgm1n)
+
 ## Usage
 With my provided `test_gifs` full of awesomeness 🐶 🐕 🐩:
 ```bash
@@ -21,7 +24,7 @@ $ go run *.go
 > Enter your gifs.com API key (ie. gifs58xxce10ad223): gifs56d63999f0f34
 # > Key set to: gifs56d63999f0f34
 # Else hit enter
-> Enter your gifs.com API key (ie. gifs58xxce10ad223): gifs56d63999f0f34
+> Enter your gifs.com API key (ie. gifs58xxce10ad223):
 # > No key set! Won't be uploading to your dashboard.
 
 # Check out localhost:8080 of the encoded pingpong gifs
